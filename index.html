@@ -1,380 +1,3383 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fabric Trading CRM</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<title>Fabric Trading Business CRM</title>
 
-    body {
-      background: #f5f6fa;
-      color: #222;
-    }
+<style>
 
-    header {
-      background: #111827;
-      color: white;
-      padding: 20px;
-    }
+:root{
+  --primary:#4f46e5;
+  --primary-dark:#3730a3;
+  --dark:#111827;
+  --light:#f3f4f6;
+  --white:#ffffff;
+  --border:#e5e7eb;
+  --green:#16a34a;
+  --red:#dc2626;
+  --orange:#ea580c;
+  --yellow:#ca8a04;
+  --blue:#2563eb;
+  --gray:#6b7280;
+}
 
-    header h1 {
-      font-size: 24px;
-    }
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
+}
 
-    header p {
-      margin-top: 5px;
-      color: #cbd5e1;
-    }
+body{
+  background:#f3f4f6;
+  color:#111827;
+}
 
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 25px;
-    }
+button{
+  cursor:pointer;
+  border:0;
+}
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      margin-bottom: 25px;
-    }
+header{
+  background:linear-gradient(135deg,#111827,#312e81);
+  color:white;
+  padding:20px;
+  position:sticky;
+  top:0;
+  z-index:50;
+}
 
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
+.header-inner{
+  max-width:1400px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
 
-    .card h3 {
-      color: #6b7280;
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
+.logo h1{
+  font-size:23px;
+}
 
-    .card .number {
-      font-size: 28px;
-      font-weight: bold;
-    }
+.logo p{
+  color:#c7d2fe;
+  font-size:13px;
+  margin-top:4px;
+}
 
-    .section {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 25px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
+.menu-btn{
+  background:#ffffff20;
+  color:white;
+  padding:10px 14px;
+  border-radius:8px;
+  display:none;
+}
 
-    .section h2 {
-      margin-bottom: 20px;
-    }
+.app{
+  max-width:1400px;
+  margin:auto;
+  display:flex;
+  min-height:calc(100vh - 80px);
+}
 
-    .form {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
+.sidebar{
+  width:230px;
+  background:white;
+  border-right:1px solid var(--border);
+  padding:20px 12px;
+}
 
-    input, select, textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      font-size: 14px;
-    }
+.nav-btn{
+  width:100%;
+  text-align:left;
+  background:white;
+  padding:12px;
+  border-radius:8px;
+  margin-bottom:5px;
+  color:#374151;
+  font-weight:bold;
+}
 
-    textarea {
-      min-height: 80px;
-    }
+.nav-btn:hover,
+.nav-btn.active{
+  background:#eef2ff;
+  color:var(--primary);
+}
 
-    .full {
-      grid-column: 1 / -1;
-    }
+.main{
+  flex:1;
+  padding:25px;
+  min-width:0;
+}
 
-    button {
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+.page{
+  display:none;
+}
 
-    button:hover {
-      background: #1d4ed8;
-    }
+.page.active{
+  display:block;
+}
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+.page-title{
+  margin-bottom:20px;
+}
 
-    th, td {
-      text-align: left;
-      padding: 12px;
-      border-bottom: 1px solid #e5e7eb;
-    }
+.page-title h2{
+  font-size:25px;
+}
 
-    th {
-      background: #f9fafb;
-    }
+.page-title p{
+  color:var(--gray);
+  margin-top:5px;
+}
 
-    .hot {
-      color: #dc2626;
-      font-weight: bold;
-    }
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:22px;
+}
 
-    .warm {
-      color: #d97706;
-      font-weight: bold;
-    }
+.card{
+  background:white;
+  padding:20px;
+  border-radius:13px;
+  border:1px solid var(--border);
+  box-shadow:0 2px 8px #00000008;
+}
 
-    .cold {
-      color: #6b7280;
-      font-weight: bold;
-    }
+.card h4{
+  color:var(--gray);
+  font-size:13px;
+  margin-bottom:9px;
+}
 
-    @media(max-width: 800px) {
-      .cards {
-        grid-template-columns: repeat(2, 1fr);
-      }
+.card .big{
+  font-size:28px;
+  font-weight:bold;
+}
 
-      .form {
-        grid-template-columns: 1fr;
-      }
+.card .small{
+  margin-top:7px;
+  color:var(--gray);
+  font-size:12px;
+}
 
-      .full {
-        grid-column: auto;
-      }
+.section{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 2px 8px #00000006;
+}
 
-      table {
-        font-size: 12px;
-      }
-    }
-  </style>
+.section-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:17px;
+}
+
+.section-header h3{
+  font-size:18px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:13px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.form-group label{
+  font-size:12px;
+  font-weight:bold;
+  color:#374151;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  border:1px solid #d1d5db;
+  border-radius:8px;
+  padding:11px;
+  font-size:14px;
+  background:white;
+}
+
+textarea{
+  min-height:80px;
+  resize:vertical;
+}
+
+.btn{
+  padding:10px 14px;
+  border-radius:8px;
+  font-weight:bold;
+  font-size:13px;
+}
+
+.btn-primary{
+  background:var(--primary);
+  color:white;
+}
+
+.btn-primary:hover{
+  background:var(--primary-dark);
+}
+
+.btn-green{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.btn-red{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.btn-orange{
+  background:#ffedd5;
+  color:#9a3412;
+}
+
+.btn-gray{
+  background:#f3f4f6;
+  color:#374151;
+}
+
+.btn-blue{
+  background:#dbeafe;
+  color:#1d4ed8;
+}
+
+.toolbar{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.table-wrap{
+  width:100%;
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:850px;
+}
+
+th,
+td{
+  padding:11px;
+  border-bottom:1px solid var(--border);
+  text-align:left;
+  vertical-align:top;
+  font-size:13px;
+}
+
+th{
+  background:#f9fafb;
+  color:#374151;
+}
+
+.badge{
+  display:inline-block;
+  padding:5px 8px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.badge-hot{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.badge-warm{
+  background:#ffedd5;
+  color:#9a3412;
+}
+
+.badge-cold{
+  background:#f3f4f6;
+  color:#4b5563;
+}
+
+.badge-green{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.badge-blue{
+  background:#dbeafe;
+  color:#1d4ed8;
+}
+
+.badge-purple{
+  background:#ede9fe;
+  color:#6d28d9;
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+}
+
+.action-btn{
+  padding:6px 8px;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.empty{
+  text-align:center;
+  padding:35px;
+  color:var(--gray);
+}
+
+.alert{
+  padding:12px;
+  border-radius:8px;
+  background:#fffbeb;
+  color:#92400e;
+  margin-bottom:15px;
+  font-size:13px;
+}
+
+.success{
+  background:#ecfdf5;
+  color:#166534;
+}
+
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:20px;
+}
+
+.progress{
+  background:#e5e7eb;
+  height:9px;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:8px;
+}
+
+.progress div{
+  height:100%;
+  background:var(--primary);
+}
+
+.stat-list{
+  list-style:none;
+}
+
+.stat-list li{
+  display:flex;
+  justify-content:space-between;
+  padding:11px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:#00000080;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:100;
+  padding:20px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  background:white;
+  width:100%;
+  max-width:700px;
+  max-height:90vh;
+  overflow:auto;
+  border-radius:14px;
+  padding:22px;
+}
+
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.close{
+  background:#f3f4f6;
+  border-radius:50%;
+  width:32px;
+  height:32px;
+}
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#111827;
+  color:white;
+  padding:13px 18px;
+  border-radius:8px;
+  display:none;
+  z-index:200;
+}
+
+.toast.show{
+  display:block;
+}
+
+@media(max-width:1050px){
+
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .form-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .toolbar{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
+@media(max-width:800px){
+
+  .menu-btn{
+    display:block;
+  }
+
+  .sidebar{
+    position:fixed;
+    left:-250px;
+    top:80px;
+    bottom:0;
+    z-index:90;
+    transition:.2s;
+    box-shadow:4px 0 10px #0002;
+  }
+
+  .sidebar.open{
+    left:0;
+  }
+
+  .main{
+    width:100%;
+    padding:15px;
+  }
+
+  .dashboard-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .cards{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .form-grid,
+  .toolbar{
+    grid-template-columns:1fr;
+  }
+
+  .full{
+    grid-column:auto;
+  }
+
+  .header-inner{
+    padding:0;
+  }
+
+  .logo h1{
+    font-size:18px;
+  }
+
+}
+
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>Fabric Trading CRM</h1>
-  <p>Boutique & Fashion Designer Lead Management</p>
-</header>
 
-<div class="container">
+<div class="header-inner">
 
-  <div class="cards">
+<div class="logo">
+<h1>Fabric Trading CRM</h1>
+<p>Boutique • Fashion Designer • Fabric Business</p>
+</div>
 
-    <div class="card">
-      <h3>Total Leads</h3>
-      <div class="number" id="totalLeads">0</div>
-    </div>
-
-    <div class="card">
-      <h3>Hot Leads</h3>
-      <div class="number" id="hotLeads">0</div>
-    </div>
-
-    <div class="card">
-      <h3>Interested</h3>
-      <div class="number" id="interestedLeads">0</div>
-    </div>
-
-    <div class="card">
-      <h3>Orders</h3>
-      <div class="number" id="orders">0</div>
-    </div>
-
-  </div>
-
-  <div class="section">
-
-    <h2>➕ Add Instagram Lead</h2>
-
-    <div class="form">
-
-      <input id="business" placeholder="Boutique / Business Name">
-
-      <input id="instagram" placeholder="Instagram Username">
-
-      <input id="contact" placeholder="Owner / Designer Name">
-
-      <input id="city" placeholder="City">
-
-      <select id="type">
-        <option value="Boutique">Boutique</option>
-        <option value="Fashion Designer">Fashion Designer</option>
-      </select>
-
-      <input id="fabric" placeholder="Fabric Requirement">
-
-      <select id="priority">
-        <option value="Hot">🔥 Hot</option>
-        <option value="Warm">🟠 Warm</option>
-        <option value="Cold">⚪ Cold</option>
-      </select>
-
-      <select id="status">
-        <option value="New">New</option>
-        <option value="Contacted">Contacted</option>
-        <option value="Interested">Interested</option>
-        <option value="Sample Sent">Sample Sent</option>
-        <option value="Quotation">Quotation</option>
-        <option value="Order">Order</option>
-      </select>
-
-      <input id="followup" type="date">
-
-      <textarea id="notes" class="full" placeholder="Notes"></textarea>
-
-      <button onclick="addLead()" class="full">
-        Save Lead
-      </button>
-
-    </div>
-
-  </div>
-
-  <div class="section">
-
-    <h2>📋 Leads</h2>
-
-    <table>
-
-      <thead>
-        <tr>
-          <th>Business</th>
-          <th>Instagram</th>
-          <th>City</th>
-          <th>Type</th>
-          <th>Fabric</th>
-          <th>Priority</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-
-      <tbody id="leadTable"></tbody>
-
-    </table>
-
-  </div>
+<button class="menu-btn" onclick="toggleMenu()">☰ Menu</button>
 
 </div>
 
+</header>
+
+
+<div class="app">
+
+<aside class="sidebar" id="sidebar">
+
+<button class="nav-btn active" onclick="showPage('dashboard',this)">
+📊 Dashboard
+</button>
+
+<button class="nav-btn" onclick="showPage('leads',this)">
+📸 Instagram Leads
+</button>
+
+<button class="nav-btn" onclick="showPage('customers',this)">
+👥 Customers
+</button>
+
+<button class="nav-btn" onclick="showPage('products',this)">
+🧵 Fabric Stock
+</button>
+
+<button class="nav-btn" onclick="showPage('purchases',this)">
+📦 Purchase
+</button>
+
+<button class="nav-btn" onclick="showPage('sales',this)">
+🧾 Sales / Orders
+</button>
+
+<button class="nav-btn" onclick="showPage('payments',this)">
+💰 Payments
+</button>
+
+<button class="nav-btn" onclick="showPage('samples',this)">
+🎨 Samples / Swatches
+</button>
+
+<button class="nav-btn" onclick="showPage('followups',this)">
+📅 Follow-ups
+</button>
+
+<button class="nav-btn" onclick="showPage('reports',this)">
+📈 Reports
+</button>
+
+<button class="nav-btn" onclick="showPage('backup',this)">
+⚙️ Backup / Data
+</button>
+
+</aside>
+
+
+<main class="main">
+
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="page active">
+
+<div class="page-title">
+<h2>Business Dashboard</h2>
+<p>Your Fabric Trading business at a glance.</p>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h4>Instagram Leads</h4>
+<div class="big" id="dashLeads">0</div>
+<div class="small">Total prospects</div>
+</div>
+
+<div class="card">
+<h4>🔥 Hot Leads</h4>
+<div class="big" id="dashHot">0</div>
+<div class="small">Priority prospects</div>
+</div>
+
+<div class="card">
+<h4>📦 Orders</h4>
+<div class="big" id="dashOrders">0</div>
+<div class="small">Confirmed orders</div>
+</div>
+
+<div class="card">
+<h4>💰 Sales</h4>
+<div class="big" id="dashSales">₹0</div>
+<div class="small">Total sales value</div>
+</div>
+
+</div>
+
+
+<div class="dashboard-grid">
+
+<div class="section">
+
+<div class="section-header">
+<h3>Lead Pipeline</h3>
+</div>
+
+<ul class="stat-list">
+
+<li>
+<span>New</span>
+<strong id="pipeNew">0</strong>
+</li>
+
+<li>
+<span>Contacted</span>
+<strong id="pipeContacted">0</strong>
+</li>
+
+<li>
+<span>Interested</span>
+<strong id="pipeInterested">0</strong>
+</li>
+
+<li>
+<span>Sample Sent</span>
+<strong id="pipeSample">0</strong>
+</li>
+
+<li>
+<span>Quotation</span>
+<strong id="pipeQuotation">0</strong>
+</li>
+
+<li>
+<span>Order</span>
+<strong id="pipeOrder">0</strong>
+</li>
+
+</ul>
+
+</div>
+
+
+<div class="section">
+
+<div class="section-header">
+<h3>Today's Follow-ups</h3>
+</div>
+
+<div id="todayFollowups">
+<div class="empty">No follow-ups today.</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- LEADS -->
+
+<section id="leads" class="page">
+
+<div class="page-title">
+<h2>📸 Instagram Lead CRM</h2>
+<p>Manage boutique owners and fashion designers.</p>
+</div>
+
+
+<div class="section">
+
+<div class="section-header">
+<h3>Add New Lead</h3>
+</div>
+
+<form id="leadForm" class="form-grid">
+
+<div class="form-group">
+<label>Business Name *</label>
+<input id="leadBusiness" required>
+</div>
+
+<div class="form-group">
+<label>Instagram Username</label>
+<input id="leadInstagram" placeholder="@username">
+</div>
+
+<div class="form-group">
+<label>Owner / Designer</label>
+<input id="leadContact">
+</div>
+
+<div class="form-group">
+<label>WhatsApp Number</label>
+<input id="leadPhone" placeholder="919XXXXXXXXX">
+</div>
+
+<div class="form-group">
+<label>City</label>
+<input id="leadCity">
+</div>
+
+<div class="form-group">
+<label>Business Type</label>
+<select id="leadType">
+<option>Boutique</option>
+<option>Fashion Designer</option>
+<option>Designer Studio</option>
+<option>Multi Brand Store</option>
+<option>Other</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Fabric Requirement</label>
+<input id="leadFabric" placeholder="Cotton / Rayon / Printed...">
+</div>
+
+<div class="form-group">
+<label>Estimated Quantity (Meter)</label>
+<input id="leadQty" type="number">
+</div>
+
+<div class="form-group">
+<label>Priority</label>
+<select id="leadPriority">
+<option>Hot</option>
+<option>Warm</option>
+<option>Cold</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Status</label>
+<select id="leadStatus">
+<option>New</option>
+<option>Contacted</option>
+<option>Interested</option>
+<option>Sample Sent</option>
+<option>Quotation</option>
+<option>Order</option>
+<option>Lost</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Next Follow-up</label>
+<input id="leadFollowup" type="date">
+</div>
+
+<div class="form-group">
+<label>Lead Source</label>
+<select id="leadSource">
+<option>Instagram</option>
+<option>Referral</option>
+<option>WhatsApp</option>
+<option>Website</option>
+<option>Market</option>
+<option>Other</option>
+</select>
+</div>
+
+<div class="form-group full">
+<label>Notes</label>
+<textarea id="leadNotes"></textarea>
+</div>
+
+<div class="full">
+<button class="btn btn-primary" type="submit">
+➕ Save Lead
+</button>
+</div>
+
+</form>
+
+</div>
+
+
+<div class="section">
+
+<div class="toolbar">
+
+<input id="leadSearch"
+placeholder="🔎 Search business, Instagram, city..."
+oninput="renderLeads()">
+
+<select id="leadTypeFilter" onchange="renderLeads()">
+<option value="All">All Types</option>
+<option>Boutique</option>
+<option>Fashion Designer</option>
+<option>Designer Studio</option>
+<option>Multi Brand Store</option>
+</select>
+
+<select id="leadPriorityFilter" onchange="renderLeads()">
+<option value="All">All Priority</option>
+<option>Hot</option>
+<option>Warm</option>
+<option>Cold</option>
+</select>
+
+<select id="leadStatusFilter" onchange="renderLeads()">
+<option value="All">All Status</option>
+<option>New</option>
+<option>Contacted</option>
+<option>Interested</option>
+<option>Sample Sent</option>
+<option>Quotation</option>
+<option>Order</option>
+<option>Lost</option>
+</select>
+
+</div>
+
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Business</th>
+<th>Instagram</th>
+<th>City / Type</th>
+<th>Fabric</th>
+<th>Qty</th>
+<th>Priority</th>
+<th>Status</th>
+<th>Follow-up</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="leadTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CUSTOMERS -->
+
+<section id="customers" class="page">
+
+<div class="page-title">
+<h2>👥 Customers</h2>
+<p>Manage boutique and designer customers.</p>
+</div>
+
+<div class="section">
+
+<form id="customerForm" class="form-grid">
+
+<div class="form-group">
+<label>Customer / Business *</label>
+<input id="customerName" required>
+</div>
+
+<div class="form-group">
+<label>Contact Person</label>
+<input id="customerContact">
+</div>
+
+<div class="form-group">
+<label>WhatsApp</label>
+<input id="customerPhone">
+</div>
+
+<div class="form-group">
+<label>City</label>
+<input id="customerCity">
+</div>
+
+<div class="form-group">
+<label>Customer Type</label>
+<select id="customerType">
+<option>Boutique</option>
+<option>Fashion Designer</option>
+<option>Retailer</option>
+<option>Other</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>GST Number</label>
+<input id="customerGST">
+</div>
+
+<div class="form-group full">
+<label>Address</label>
+<textarea id="customerAddress"></textarea>
+</div>
+
+<div class="full">
+<button class="btn btn-primary">➕ Save Customer</button>
+</div>
+
+</form>
+
+</div>
+
+
+<div class="section">
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Business</th>
+<th>Contact</th>
+<th>Phone</th>
+<th>City</th>
+<th>Type</th>
+<th>GST</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="customerTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section id="products" class="page">
+
+<div class="page-title">
+<h2>🧵 Fabric Stock</h2>
+<p>Track your fabric inventory.</p>
+</div>
+
+<div class="section">
+
+<form id="productForm" class="form-grid">
+
+<div class="form-group">
+<label>Fabric Name *</label>
+<input id="productName" required>
+</div>
+
+<div class="form-group">
+<label>Quality / Design</label>
+<input id="productQuality">
+</div>
+
+<div class="form-group">
+<label>Colour</label>
+<input id="productColour">
+</div>
+
+<div class="form-group">
+<label>Current Stock (Meter)</label>
+<input id="productStock" type="number" step="0.01">
+</div>
+
+<div class="form-group">
+<label>Purchase Rate / Meter</label>
+<input id="productPurchaseRate" type="number" step="0.01">
+</div>
+
+<div class="form-group">
+<label>Selling Rate / Meter</label>
+<input id="productSaleRate" type="number" step="0.01">
+</div>
+
+<div class="form-group">
+<label>Supplier</label>
+<input id="productSupplier">
+</div>
+
+<div class="full">
+<button class="btn btn-primary">➕ Save Fabric</button>
+</div>
+
+</form>
+
+</div>
+
+
+<div class="section">
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Fabric</th>
+<th>Quality</th>
+<th>Colour</th>
+<th>Stock</th>
+<th>Purchase Rate</th>
+<th>Sale Rate</th>
+<th>Supplier</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="productTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PURCHASE -->
+
+<section id="purchases" class="page">
+
+<div class="page-title">
+<h2>📦 Purchase</h2>
+<p>Record fabric purchases.</p>
+</div>
+
+<div class="section">
+
+<form id="purchaseForm" class="form-grid">
+
+<div class="form-group">
+<label>Supplier</label>
+<input id="purchaseSupplier">
+</div>
+
+<div class="form-group">
+<label>Fabric *</label>
+<input id="purchaseFabric" required>
+</div>
+
+<div class="form-group">
+<label>Date</label>
+<input id="purchaseDate" type="date">
+</div>
+
+<div class="form-group">
+<label>Quantity Meter</label>
+<input id="purchaseQty" type="number" step="0.01">
+</div>
+
+<div class="form-group">
+<label>Rate / Meter</label>
+<input id="purchaseRate" type="number" step="0.01">
+</div>
+
+<div class="form-group">
+<label>Payment Status</label>
+<select id="purchasePayment">
+<option>Paid</option>
+<option>Pending</option>
+<option>Partial</option>
+</select>
+</div>
+
+<div class="form-group full">
+<label>Notes</label>
+<textarea id="purchaseNotes"></textarea>
+</div>
+
+<div class="full">
+<button class="btn btn-primary">➕ Save Purchase</button>
+</div>
+
+</form>
+
+</div>
+
+
+<div class="section">
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Date</th>
+<th>Supplier</th>
+<th>Fabric</th>
+<th>Qty</th>
+<th>Rate</th>
+<th>Total</th>
+<th>Payment</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="purchaseTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SALES -->
+
+<section id="sales" class="page">
+
+<div class="page-title">
+<h2>🧾 Sales / Orders</h2>
+<p>Record customer orders and sales.</p>
+</div>
+
+<div class="section">
+
+<form id="saleForm" class="form-grid">
+
+<div class="form-group">
+<label>Customer *</label>
+<input id="saleCustomer" required>
+</div>
+
+<div class="form-group">
+<label>Fabric</label>
+<input id="saleFabric">
+</div>
+
+<div class="form-group">
+<label>Date</label>
+<input id="saleDate" type="date">
+</div>
+
+<div class="form-group">
+<label>Quantity Meter</label>
+<input id="saleQty" type="number" step="0.01">
+</div>
+
+<div class="form-group">
+<label>Selling Rate / Meter</label>
+<input id="saleRate" type="number" step="0.01">
+</div>
+
+<div class="form-group">
+<label>Discount</label>
+<input id="saleDiscount" type="number" step="0.01" value="0">
+</div>
+
+<div class="form-group">
+<label>Paid Amount</label>
+<input id="salePaid" type="number" step="0.01" value="0">
+</div>
+
+<div class="form-group">
+<label>Payment Status</label>
+<select id="salePayment">
+<option>Paid</option>
+<option>Pending</option>
+<option>Partial</option>
+</select>
+</div>
+
+<div class="form-group full">
+<label>Notes</label>
+<textarea id="saleNotes"></textarea>
+</div>
+
+<div class="full">
+<button class="btn btn-primary">➕ Save Sale / Order</button>
+</div>
+
+</form>
+
+</div>
+
+
+<div class="section">
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Date</th>
+<th>Customer</th>
+<th>Fabric</th>
+<th>Qty</th>
+<th>Rate</th>
+<th>Total</th>
+<th>Paid</th>
+<th>Due</th>
+<th>Payment</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="salesTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PAYMENTS -->
+
+<section id="payments" class="page">
+
+<div class="page-title">
+<h2>💰 Payments</h2>
+<p>Track receivables and customer outstanding.</p>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h4>Total Sales</h4>
+<div class="big" id="paymentSales">₹0</div>
+</div>
+
+<div class="card">
+<h4>Total Received</h4>
+<div class="big" id="paymentReceived">₹0</div>
+</div>
+
+<div class="card">
+<h4>Total Outstanding</h4>
+<div class="big" id="paymentDue">₹0</div>
+</div>
+
+<div class="card">
+<h4>Orders</h4>
+<div class="big" id="paymentOrders">0</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SAMPLES -->
+
+<section id="samples" class="page">
+
+<div class="page-title">
+<h2>🎨 Samples / Swatches</h2>
+<p>Track fabric samples sent to prospects.</p>
+</div>
+
+<div class="section">
+
+<form id="sampleForm" class="form-grid">
+
+<div class="form-group">
+<label>Customer / Lead</label>
+<input id="sampleCustomer">
+</div>
+
+<div class="form-group">
+<label>Fabric</label>
+<input id="sampleFabric">
+</div>
+
+<div class="form-group">
+<label>Sample Date</label>
+<input id="sampleDate" type="date">
+</div>
+
+<div class="form-group">
+<label>Sample Type</label>
+<select id="sampleType">
+<option>Swatch</option>
+<option>Cut Piece</option>
+<option>Catalogue</option>
+<option>Other</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Courier / Tracking</label>
+<input id="sampleTracking">
+</div>
+
+<div class="form-group">
+<label>Status</label>
+<select id="sampleStatus">
+<option>Sent</option>
+<option>Received</option>
+<option>Interested</option>
+<option>Not Interested</option>
+<option>Order</option>
+</select>
+</div>
+
+<div class="form-group full">
+<label>Notes</label>
+<textarea id="sampleNotes"></textarea>
+</div>
+
+<div class="full">
+<button class="btn btn-primary">➕ Save Sample</button>
+</div>
+
+</form>
+
+</div>
+
+
+<div class="section">
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Date</th>
+<th>Customer / Lead</th>
+<th>Fabric</th>
+<th>Type</th>
+<th>Tracking</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="sampleTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FOLLOW UPS -->
+
+<section id="followups" class="page">
+
+<div class="page-title">
+<h2>📅 Follow-ups</h2>
+<p>Never miss a potential customer.</p>
+</div>
+
+<div class="section">
+
+<div class="toolbar">
+
+<input
+id="followSearch"
+placeholder="Search lead..."
+oninput="renderFollowups()">
+
+<select id="followFilter" onchange="renderFollowups()">
+<option value="All">All</option>
+<option value="Today">Today</option>
+<option value="Upcoming">Upcoming</option>
+<option value="Overdue">Overdue</option>
+</select>
+
+</div>
+
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Business</th>
+<th>Contact</th>
+<th>Phone</th>
+<th>Follow-up</th>
+<th>Priority</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="followTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- REPORTS -->
+
+<section id="reports" class="page">
+
+<div class="page-title">
+<h2>📈 Reports</h2>
+<p>Business performance summary.</p>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h4>Sales</h4>
+<div class="big" id="reportSales">₹0</div>
+</div>
+
+<div class="card">
+<h4>Purchase</h4>
+<div class="big" id="reportPurchase">₹0</div>
+</div>
+
+<div class="card">
+<h4>Gross Margin</h4>
+<div class="big" id="reportProfit">₹0</div>
+</div>
+
+<div class="card">
+<h4>Outstanding</h4>
+<div class="big" id="reportDue">₹0</div>
+</div>
+
+</div>
+
+
+<div class="section">
+
+<h3>Lead Conversion</h3>
+
+<ul class="stat-list">
+
+<li>
+<span>Total Leads</span>
+<strong id="reportLeads">0</strong>
+</li>
+
+<li>
+<span>Interested</span>
+<strong id="reportInterested">0</strong>
+</li>
+
+<li>
+<span>Orders</span>
+<strong id="reportOrders">0</strong>
+</li>
+
+</ul>
+
+</div>
+
+</section>
+
+
+<!-- BACKUP -->
+
+<section id="backup" class="page">
+
+<div class="page-title">
+<h2>⚙️ Backup & Data</h2>
+<p>Protect your CRM data.</p>
+</div>
+
+<div class="section">
+
+<div class="alert">
+<strong>Important:</strong> This version stores data in this browser. Use Backup regularly.
+</div>
+
+<button class="btn btn-primary" onclick="exportBackup()">
+⬇️ Download Full Backup
+</button>
+
+<input
+type="file"
+id="restoreFile"
+accept=".json"
+style="margin-top:15px;">
+
+<button
+class="btn btn-green"
+onclick="restoreBackup()">
+⬆️ Restore Backup
+</button>
+
+<hr style="margin:20px 0;border:0;border-top:1px solid #eee;">
+
+<button
+class="btn btn-red"
+onclick="clearAllData()">
+⚠️ Delete ALL CRM Data
+</button>
+
+</div>
+
+</section>
+
+
+</main>
+
+</div>
+
+
+<!-- EDIT MODAL -->
+
+<div class="modal" id="editModal">
+
+<div class="modal-box">
+
+<div class="modal-header">
+
+<h3>Edit Lead</h3>
+
+<button class="close" onclick="closeModal()">×</button>
+
+</div>
+
+<div class="form-grid">
+
+<input type="hidden" id="editId">
+
+<div class="form-group">
+<label>Business</label>
+<input id="editBusiness">
+</div>
+
+<div class="form-group">
+<label>Instagram</label>
+<input id="editInstagram">
+</div>
+
+<div class="form-group">
+<label>Contact</label>
+<input id="editContact">
+</div>
+
+<div class="form-group">
+<label>Phone</label>
+<input id="editPhone">
+</div>
+
+<div class="form-group">
+<label>City</label>
+<input id="editCity">
+</div>
+
+<div class="form-group">
+<label>Type</label>
+<select id="editType">
+<option>Boutique</option>
+<option>Fashion Designer</option>
+<option>Designer Studio</option>
+<option>Multi Brand Store</option>
+<option>Other</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Fabric</label>
+<input id="editFabric">
+</div>
+
+<div class="form-group">
+<label>Quantity</label>
+<input id="editQty" type="number">
+</div>
+
+<div class="form-group">
+<label>Priority</label>
+<select id="editPriority">
+<option>Hot</option>
+<option>Warm</option>
+<option>Cold</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Status</label>
+<select id="editStatus">
+<option>New</option>
+<option>Contacted</option>
+<option>Interested</option>
+<option>Sample Sent</option>
+<option>Quotation</option>
+<option>Order</option>
+<option>Lost</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Follow-up</label>
+<input id="editFollowup" type="date">
+</div>
+
+<div class="form-group full">
+<label>Notes</label>
+<textarea id="editNotes"></textarea>
+</div>
+
+<div class="full">
+
+<button class="btn btn-primary" onclick="saveLeadEdit()">
+Save Changes
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
 <script>
 
-let leads = JSON.parse(localStorage.getItem("fabricLeads")) || [];
+/* =========================
+   DATABASE
+========================= */
 
-function addLead() {
+const DB_KEY = "fabricTradingCRM_v1";
 
-  const lead = {
+let db = JSON.parse(
+localStorage.getItem(DB_KEY)
+) || {
 
-    business: document.getElementById("business").value,
-    instagram: document.getElementById("instagram").value,
-    contact: document.getElementById("contact").value,
-    city: document.getElementById("city").value,
-    type: document.getElementById("type").value,
-    fabric: document.getElementById("fabric").value,
-    priority: document.getElementById("priority").value,
-    status: document.getElementById("status").value,
-    followup: document.getElementById("followup").value,
-    notes: document.getElementById("notes").value
+leads:[],
+customers:[],
+products:[],
+purchases:[],
+sales:[],
+samples:[]
 
-  };
+};
 
-  if (!lead.business) {
-    alert("Please enter business name");
-    return;
-  }
 
-  leads.push(lead);
+function saveDB(){
 
-  localStorage.setItem(
-    "fabricLeads",
-    JSON.stringify(leads)
-  );
-
-  clearForm();
-  renderLeads();
-}
-
-function clearForm() {
-
-  document.getElementById("business").value = "";
-  document.getElementById("instagram").value = "";
-  document.getElementById("contact").value = "";
-  document.getElementById("city").value = "";
-  document.getElementById("fabric").value = "";
-  document.getElementById("followup").value = "";
-  document.getElementById("notes").value = "";
+localStorage.setItem(
+DB_KEY,
+JSON.stringify(db)
+);
 
 }
 
-function renderLeads() {
 
-  const table = document.getElementById("leadTable");
+function id(){
 
-  table.innerHTML = "";
-
-  leads.forEach(lead => {
-
-    const row = document.createElement("tr");
-
-    row.innerHTML = `
-
-      <td>${lead.business}</td>
-
-      <td>${lead.instagram}</td>
-
-      <td>${lead.city}</td>
-
-      <td>${lead.type}</td>
-
-      <td>${lead.fabric}</td>
-
-      <td class="${lead.priority.toLowerCase()}">
-        ${lead.priority}
-      </td>
-
-      <td>${lead.status}</td>
-
-    `;
-
-    table.appendChild(row);
-
-  });
-
-  updateDashboard();
+return Date.now() +
+Math.floor(Math.random()*1000);
 
 }
 
-function updateDashboard() {
 
-  document.getElementById("totalLeads").innerText =
-    leads.length;
+function money(value){
 
-  document.getElementById("hotLeads").innerText =
-    leads.filter(x => x.priority === "Hot").length;
-
-  document.getElementById("interestedLeads").innerText =
-    leads.filter(x => x.status === "Interested").length;
-
-  document.getElementById("orders").innerText =
-    leads.filter(x => x.status === "Order").length;
+return "₹" +
+Number(value || 0)
+.toLocaleString("en-IN",{
+maximumFractionDigits:2
+});
 
 }
+
+
+function today(){
+
+return new Date()
+.toISOString()
+.slice(0,10);
+
+}
+
+
+function showToast(message){
+
+const t =
+document.getElementById("toast");
+
+t.innerText = message;
+
+t.classList.add("show");
+
+setTimeout(()=>{
+t.classList.remove("show");
+},2500);
+
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function showPage(page,button){
+
+document
+.querySelectorAll(".page")
+.forEach(p =>
+p.classList.remove("active")
+);
+
+document
+.getElementById(page)
+.classList.add("active");
+
+
+document
+.querySelectorAll(".nav-btn")
+.forEach(b =>
+b.classList.remove("active")
+);
+
+if(button){
+
+button.classList.add("active");
+
+}
+
+document
+.getElementById("sidebar")
+.classList.remove("open");
+
+
+refreshAll();
+
+}
+
+
+function toggleMenu(){
+
+document
+.getElementById("sidebar")
+.classList.toggle("open");
+
+}
+
+
+/* =========================
+   LEADS
+========================= */
+
+document
+.getElementById("leadForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const lead = {
+
+id:id(),
+
+business:
+leadBusiness.value.trim(),
+
+instagram:
+leadInstagram.value.trim(),
+
+contact:
+leadContact.value.trim(),
+
+phone:
+leadPhone.value.trim(),
+
+city:
+leadCity.value.trim(),
+
+type:
+leadType.value,
+
+fabric:
+leadFabric.value.trim(),
+
+qty:
+Number(leadQty.value || 0),
+
+priority:
+leadPriority.value,
+
+status:
+leadStatus.value,
+
+followup:
+leadFollowup.value,
+
+source:
+leadSource.value,
+
+notes:
+leadNotes.value.trim(),
+
+createdAt:
+today()
+
+};
+
+db.leads.push(lead);
+
+saveDB();
+
+this.reset();
+
+showToast("Lead saved successfully!");
+
+refreshAll();
+
+});
+
+
+function priorityBadge(priority){
+
+let cls =
+priority === "Hot"
+? "badge-hot"
+: priority === "Warm"
+? "badge-warm"
+: "badge-cold";
+
+return `
+<span class="badge ${cls}">
+${priority}
+</span>
+`;
+
+}
+
+
+function statusBadge(status){
+
+let cls =
+status === "Order"
+? "badge-green"
+: status === "Interested"
+? "badge-blue"
+: status === "Quotation"
+? "badge-purple"
+: "";
+
+return `
+<span class="badge ${cls}">
+${status}
+</span>
+`;
+
+}
+
+
+function renderLeads(){
+
+const table =
+document.getElementById("leadTable");
+
+if(!table) return;
+
+const search =
+(document.getElementById("leadSearch")?.value || "")
+.toLowerCase();
+
+const type =
+document.getElementById("leadTypeFilter")?.value || "All";
+
+const priority =
+document.getElementById("leadPriorityFilter")?.value || "All";
+
+const status =
+document.getElementById("leadStatusFilter")?.value || "All";
+
+
+const data =
+db.leads.filter(l=>{
+
+const text = (
+
+l.business + " " +
+l.instagram + " " +
+l.city + " " +
+l.fabric + " " +
+l.contact
+
+).toLowerCase();
+
+
+return (
+
+text.includes(search) &&
+
+(type === "All" || l.type === type) &&
+
+(priority === "All" || l.priority === priority) &&
+
+(status === "All" || l.status === status)
+
+);
+
+});
+
+
+if(!data.length){
+
+table.innerHTML =
+`<tr><td colspan="9" class="empty">
+No leads found.
+</td></tr>`;
+
+return;
+
+}
+
+
+table.innerHTML =
+data.map(l=>`
+
+<tr>
+
+<td>
+
+<strong>
+${esc(l.business)}
+</strong>
+
+<br>
+
+<small>
+${esc(l.contact)}
+</small>
+
+</td>
+
+
+<td>
+
+${esc(l.instagram || "-")}
+
+<br>
+
+${l.instagram ? `
+
+<button
+class="action-btn btn-orange"
+onclick="openInstagram('${escJS(l.instagram)}')">
+Instagram
+</button>
+
+`:""}
+
+</td>
+
+
+<td>
+
+${esc(l.city)}
+
+<br>
+
+<small>
+${esc(l.type)}
+</small>
+
+</td>
+
+
+<td>
+${esc(l.fabric)}
+</td>
+
+
+<td>
+${l.qty || "-"}
+</td>
+
+
+<td>
+${priorityBadge(l.priority)}
+</td>
+
+
+<td>
+${statusBadge(l.status)}
+</td>
+
+
+<td>
+${l.followup || "-"}
+</td>
+
+
+<td>
+
+<div class="actions">
+
+${l.phone ? `
+
+<button
+class="action-btn btn-green"
+onclick="openWhatsApp('${escJS(l.phone)}')">
+WhatsApp
+</button>
+
+`:""}
+
+<button
+class="action-btn btn-blue"
+onclick="editLead('${l.id}')">
+Edit
+</button>
+
+<button
+class="action-btn btn-red"
+onclick="deleteLead('${l.id}')">
+Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`).join("");
+
+}
+
+
+function openInstagram(username){
+
+username =
+username
+.replace("@","")
+.trim();
+
+if(username){
+
+window.open(
+"https://instagram.com/" +
+encodeURIComponent(username),
+"_blank"
+);
+
+}
+
+}
+
+
+function openWhatsApp(phone){
+
+let p =
+String(phone)
+.replace(/\D/g,"");
+
+if(p.length < 10){
+
+alert("Please add a valid WhatsApp number.");
+
+return;
+
+}
+
+if(p.length === 10){
+
+p = "91" + p;
+
+}
+
+window.open(
+"https://wa.me/" + p,
+"_blank"
+);
+
+}
+
+
+function deleteLead(leadId){
+
+if(!confirm(
+"Delete this lead?"
+)) return;
+
+db.leads =
+db.leads.filter(
+l => String(l.id) !== String(leadId)
+);
+
+saveDB();
+
+showToast("Lead deleted.");
+
+refreshAll();
+
+}
+
+
+function editLead(leadId){
+
+const l =
+db.leads.find(
+x => String(x.id) === String(leadId)
+);
+
+if(!l) return;
+
+editId.value = l.id;
+editBusiness.value = l.business;
+editInstagram.value = l.instagram;
+editContact.value = l.contact;
+editPhone.value = l.phone;
+editCity.value = l.city;
+editType.value = l.type;
+editFabric.value = l.fabric;
+editQty.value = l.qty;
+editPriority.value = l.priority;
+editStatus.value = l.status;
+editFollowup.value = l.followup;
+editNotes.value = l.notes;
+
+document
+.getElementById("editModal")
+.classList.add("show");
+
+}
+
+
+function closeModal(){
+
+document
+.getElementById("editModal")
+.classList.remove("show");
+
+}
+
+
+function saveLeadEdit(){
+
+const l =
+db.leads.find(
+x => String(x.id) === String(editId.value)
+);
+
+if(!l) return;
+
+l.business = editBusiness.value.trim();
+l.instagram = editInstagram.value.trim();
+l.contact = editContact.value.trim();
+l.phone = editPhone.value.trim();
+l.city = editCity.value.trim();
+l.type = editType.value;
+l.fabric = editFabric.value.trim();
+l.qty = Number(editQty.value || 0);
+l.priority = editPriority.value;
+l.status = editStatus.value;
+l.followup = editFollowup.value;
+l.notes = editNotes.value.trim();
+
+saveDB();
+
+closeModal();
+
+showToast("Lead updated.");
+
+refreshAll();
+
+}
+
+
+/* =========================
+   CUSTOMERS
+========================= */
+
+document
+.getElementById("customerForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+db.customers.push({
+
+id:id(),
+
+name:customerName.value.trim(),
+
+contact:customerContact.value.trim(),
+
+phone:customerPhone.value.trim(),
+
+city:customerCity.value.trim(),
+
+type:customerType.value,
+
+gst:customerGST.value.trim(),
+
+address:customerAddress.value.trim()
+
+});
+
+saveDB();
+
+this.reset();
+
+showToast("Customer saved!");
+
+renderCustomers();
+
+});
+
+
+function renderCustomers(){
+
+const table =
+document.getElementById("customerTable");
+
+if(!db.customers.length){
+
+table.innerHTML =
+`<tr><td colspan="7" class="empty">
+No customers yet.
+</td></tr>`;
+
+return;
+
+}
+
+table.innerHTML =
+db.customers.map(c=>`
+
+<tr>
+
+<td><strong>${esc(c.name)}</strong></td>
+
+<td>${esc(c.contact)}</td>
+
+<td>${esc(c.phone)}</td>
+
+<td>${esc(c.city)}</td>
+
+<td>${esc(c.type)}</td>
+
+<td>${esc(c.gst)}</td>
+
+<td>
+
+<button
+class="action-btn btn-green"
+onclick="openWhatsApp('${escJS(c.phone)}')">
+WhatsApp
+</button>
+
+<button
+class="action-btn btn-red"
+onclick="deleteCustomer('${c.id}')">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`).join("");
+
+}
+
+
+function deleteCustomer(customerId){
+
+if(!confirm("Delete customer?")) return;
+
+db.customers =
+db.customers.filter(
+x => String(x.id) !== String(customerId)
+);
+
+saveDB();
+
+refreshAll();
+
+}
+
+
+/* =========================
+   PRODUCTS
+========================= */
+
+document
+.getElementById("productForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+db.products.push({
+
+id:id(),
+
+name:productName.value.trim(),
+
+quality:productQuality.value.trim(),
+
+colour:productColour.value.trim(),
+
+stock:Number(productStock.value || 0),
+
+purchaseRate:Number(productPurchaseRate.value || 0),
+
+saleRate:Number(productSaleRate.value || 0),
+
+supplier:productSupplier.value.trim()
+
+});
+
+saveDB();
+
+this.reset();
+
+showToast("Fabric added!");
+
+renderProducts();
+
+});
+
+
+function renderProducts(){
+
+const table =
+document.getElementById("productTable");
+
+if(!db.products.length){
+
+table.innerHTML =
+`<tr><td colspan="8" class="empty">
+No fabric added.
+</td></tr>`;
+
+return;
+
+}
+
+table.innerHTML =
+db.products.map(p=>`
+
+<tr>
+
+<td><strong>${esc(p.name)}</strong></td>
+
+<td>${esc(p.quality)}</td>
+
+<td>${esc(p.colour)}</td>
+
+<td>${p.stock}</td>
+
+<td>${money(p.purchaseRate)}</td>
+
+<td>${money(p.saleRate)}</td>
+
+<td>${esc(p.supplier)}</td>
+
+<td>
+
+<button
+class="action-btn btn-red"
+onclick="deleteProduct('${p.id}')">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`).join("");
+
+}
+
+
+function deleteProduct(productId){
+
+if(!confirm("Delete fabric?")) return;
+
+db.products =
+db.products.filter(
+x => String(x.id) !== String(productId)
+);
+
+saveDB();
+
+refreshAll();
+
+}
+
+
+/* =========================
+   PURCHASE
+========================= */
+
+document
+.getElementById("purchaseForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const qty =
+Number(purchaseQty.value || 0);
+
+const rate =
+Number(purchaseRate.value || 0);
+
+db.purchases.push({
+
+id:id(),
+
+supplier:
+purchaseSupplier.value.trim(),
+
+fabric:
+purchaseFabric.value.trim(),
+
+date:
+purchaseDate.value || today(),
+
+qty:qty,
+
+rate:rate,
+
+total:
+qty * rate,
+
+payment:
+purchasePayment.value,
+
+notes:
+purchaseNotes.value.trim()
+
+});
+
+saveDB();
+
+this.reset();
+
+showToast("Purchase saved!");
+
+renderPurchases();
+
+});
+
+
+function renderPurchases(){
+
+const table =
+document.getElementById("purchaseTable");
+
+if(!db.purchases.length){
+
+table.innerHTML =
+`<tr><td colspan="8" class="empty">
+No purchases.
+</td></tr>`;
+
+return;
+
+}
+
+table.innerHTML =
+db.purchases.map(p=>`
+
+<tr>
+
+<td>${p.date}</td>
+
+<td>${esc(p.supplier)}</td>
+
+<td>${esc(p.fabric)}</td>
+
+<td>${p.qty}</td>
+
+<td>${money(p.rate)}</td>
+
+<td>${money(p.total)}</td>
+
+<td>${esc(p.payment)}</td>
+
+<td>
+
+<button
+class="action-btn btn-red"
+onclick="deletePurchase('${p.id}')">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`).join("");
+
+}
+
+
+function deletePurchase(id){
+
+if(!confirm("Delete purchase?")) return;
+
+db.purchases =
+db.purchases.filter(
+x => String(x.id) !== String(id)
+);
+
+saveDB();
+
+refreshAll();
+
+}
+
+
+/* =========================
+   SALES
+========================= */
+
+document
+.getElementById("saleForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const qty =
+Number(saleQty.value || 0);
+
+const rate =
+Number(saleRate.value || 0);
+
+const discount =
+Number(saleDiscount.value || 0);
+
+const paid =
+Number(salePaid.value || 0);
+
+const gross =
+qty * rate;
+
+const total =
+Math.max(0,gross-discount);
+
+const due =
+Math.max(0,total-paid);
+
+
+db.sales.push({
+
+id:id(),
+
+customer:
+saleCustomer.value.trim(),
+
+fabric:
+saleFabric.value.trim(),
+
+date:
+saleDate.value || today(),
+
+qty:qty,
+
+rate:rate,
+
+discount:discount,
+
+total:total,
+
+paid:paid,
+
+due:due,
+
+payment:
+salePayment.value,
+
+notes:
+saleNotes.value.trim()
+
+});
+
+
+saveDB();
+
+this.reset();
+
+showToast("Sale / Order saved!");
+
+refreshAll();
+
+});
+
+
+function renderSales(){
+
+const table =
+document.getElementById("salesTable");
+
+if(!db.sales.length){
+
+table.innerHTML =
+`<tr><td colspan="10" class="empty">
+No sales/orders yet.
+</td></tr>`;
+
+return;
+
+}
+
+table.innerHTML =
+db.sales.map(s=>`
+
+<tr>
+
+<td>${s.date}</td>
+
+<td>${esc(s.customer)}</td>
+
+<td>${esc(s.fabric)}</td>
+
+<td>${s.qty}</td>
+
+<td>${money(s.rate)}</td>
+
+<td>${money(s.total)}</td>
+
+<td>${money(s.paid)}</td>
+
+<td>${money(s.due)}</td>
+
+<td>${esc(s.payment)}</td>
+
+<td>
+
+<button
+class="action-btn btn-red"
+onclick="deleteSale('${s.id}')">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`).join("");
+
+}
+
+
+function deleteSale(id){
+
+if(!confirm("Delete sale?")) return;
+
+db.sales =
+db.sales.filter(
+x => String(x.id) !== String(id)
+);
+
+saveDB();
+
+refreshAll();
+
+}
+
+
+/* =========================
+   SAMPLES
+========================= */
+
+document
+.getElementById("sampleForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+db.samples.push({
+
+id:id(),
+
+customer:
+sampleCustomer.value.trim(),
+
+fabric:
+sampleFabric.value.trim(),
+
+date:
+sampleDate.value || today(),
+
+type:
+sampleType.value,
+
+tracking:
+sampleTracking.value.trim(),
+
+status:
+sampleStatus.value,
+
+notes:
+sampleNotes.value.trim()
+
+});
+
+saveDB();
+
+this.reset();
+
+showToast("Sample saved!");
+
+renderSamples();
+
+});
+
+
+function renderSamples(){
+
+const table =
+document.getElementById("sampleTable");
+
+if(!db.samples.length){
+
+table.innerHTML =
+`<tr><td colspan="7" class="empty">
+No samples.
+</td></tr>`;
+
+return;
+
+}
+
+table.innerHTML =
+db.samples.map(s=>`
+
+<tr>
+
+<td>${s.date}</td>
+
+<td>${esc(s.customer)}</td>
+
+<td>${esc(s.fabric)}</td>
+
+<td>${esc(s.type)}</td>
+
+<td>${esc(s.tracking)}</td>
+
+<td>${esc(s.status)}</td>
+
+<td>
+
+<button
+class="action-btn btn-red"
+onclick="deleteSample('${s.id}')">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`).join("");
+
+}
+
+
+function deleteSample(id){
+
+if(!confirm("Delete sample?")) return;
+
+db.samples =
+db.samples.filter(
+x => String(x.id) !== String(id)
+);
+
+saveDB();
+
+refreshAll();
+
+}
+
+
+/* =========================
+   FOLLOW UPS
+========================= */
+
+function renderFollowups(){
+
+const table =
+document.getElementById("followTable");
+
+const search =
+(document.getElementById("followSearch")?.value || "")
+.toLowerCase();
+
+const filter =
+document.getElementById("followFilter")?.value || "All";
+
+const now =
+today();
+
+
+const data =
+db.leads.filter(l=>{
+
+if(!l.followup) return false;
+
+const text =
+(l.business + " " + l.contact)
+.toLowerCase();
+
+if(!text.includes(search)) return false;
+
+if(filter === "Today"){
+
+return l.followup === now;
+
+}
+
+if(filter === "Upcoming"){
+
+return l.followup > now;
+
+}
+
+if(filter === "Overdue"){
+
+return l.followup < now;
+
+}
+
+return true;
+
+});
+
+
+if(!data.length){
+
+table.innerHTML =
+`<tr><td colspan="7" class="empty">
+No follow-ups found.
+</td></tr>`;
+
+return;
+
+}
+
+
+table.innerHTML =
+data.map(l=>`
+
+<tr>
+
+<td>
+<strong>${esc(l.business)}</strong>
+</td>
+
+<td>${esc(l.contact)}</td>
+
+<td>${esc(l.phone)}</td>
+
+<td>${l.followup}</td>
+
+<td>${priorityBadge(l.priority)}</td>
+
+<td>${statusBadge(l.status)}</td>
+
+<td>
+
+${l.phone ? `
+
+<button
+class="action-btn btn-green"
+onclick="openWhatsApp('${escJS(l.phone)}')">
+WhatsApp
+</button>
+
+`:""}
+
+<button
+class="action-btn btn-blue"
+onclick="editLead('${l.id}')">
+Edit
+</button>
+
+</td>
+
+</tr>
+
+`).join("");
+
+}
+
+
+/* =========================
+   PAYMENTS / REPORTS
+========================= */
+
+function updateReports(){
+
+const sales =
+db.sales.reduce(
+(sum,s)=>sum+Number(s.total||0),0
+);
+
+const received =
+db.sales.reduce(
+(sum,s)=>sum+Number(s.paid||0),0
+);
+
+const due =
+db.sales.reduce(
+(sum,s)=>sum+Number(s.due||0),0
+);
+
+const purchase =
+db.purchases.reduce(
+(sum,p)=>sum+Number(p.total||0),0
+);
+
+const estimatedProfit =
+sales - purchase;
+
+
+document.getElementById("paymentSales")
+.innerText=money(sales);
+
+document.getElementById("paymentReceived")
+.innerText=money(received);
+
+document.getElementById("paymentDue")
+.innerText=money(due);
+
+document.getElementById("paymentOrders")
+.innerText=db.sales.length;
+
+
+document.getElementById("reportSales")
+.innerText=money(sales);
+
+document.getElementById("reportPurchase")
+.innerText=money(purchase);
+
+document.getElementById("reportProfit")
+.innerText=money(estimatedProfit);
+
+document.getElementById("reportDue")
+.innerText=money(due);
+
+document.getElementById("reportLeads")
+.innerText=db.leads.length;
+
+document.getElementById("reportInterested")
+.innerText=
+db.leads.filter(
+l=>l.status==="Interested"
+).length;
+
+document.getElementById("reportOrders")
+.innerText=
+db.sales.length;
+
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+function updateDashboard(){
+
+document.getElementById("dashLeads")
+.innerText=db.leads.length;
+
+document.getElementById("dashHot")
+.innerText=
+db.leads.filter(
+l=>l.priority==="Hot"
+).length;
+
+document.getElementById("dashOrders")
+.innerText=db.sales.length;
+
+
+const sales =
+db.sales.reduce(
+(sum,s)=>sum+Number(s.total||0),0
+);
+
+document.getElementById("dashSales")
+.innerText=money(sales);
+
+
+const statuses = [
+"New",
+"Contacted",
+"Interested",
+"Sample Sent",
+"Quotation",
+"Order"
+];
+
+statuses.forEach(status=>{
+
+const el =
+document.getElementById(
+"pipe"+status.replace(/\s/g,"")
+);
+
+if(el){
+
+el.innerText =
+db.leads.filter(
+l=>l.status===status
+).length;
+
+}
+
+});
+
+
+const todayLeads =
+db.leads.filter(
+l=>l.followup===today()
+);
+
+
+const box =
+document.getElementById("todayFollowups");
+
+if(!todayLeads.length){
+
+box.innerHTML =
+`<div class="empty">
+No follow-ups today.
+</div>`;
+
+}else{
+
+box.innerHTML =
+todayLeads.map(l=>`
+
+<div style="
+padding:10px 0;
+border-bottom:1px solid #eee;
+">
+
+<strong>${esc(l.business)}</strong>
+
+<br>
+
+<small>
+${esc(l.contact)}
+</small>
+
+<br>
+
+${priorityBadge(l.priority)}
+
+</div>
+
+`).join("");
+
+}
+
+}
+
+
+/* =========================
+   BACKUP
+========================= */
+
+function exportBackup(){
+
+const data =
+JSON.stringify(db,null,2);
+
+const blob =
+new Blob(
+[data],
+{type:"application/json"}
+);
+
+const url =
+URL.createObjectURL(blob);
+
+const a =
+document.createElement("a");
+
+a.href=url;
+
+a.download =
+"fabric-trading-crm-backup-" +
+today() +
+".json";
+
+a.click();
+
+URL.revokeObjectURL(url);
+
+showToast("Backup downloaded.");
+
+}
+
+
+function restoreBackup(){
+
+const file =
+document.getElementById("restoreFile")
+.files[0];
+
+if(!file){
+
+alert("Please select a backup file.");
+
+return;
+
+}
+
+const reader =
+new FileReader();
+
+reader.onload=function(e){
+
+try{
+
+const restored =
+JSON.parse(e.target.result);
+
+if(
+!restored.leads ||
+!restored.customers ||
+!restored.products
+){
+
+throw new Error();
+
+}
+
+db=restored;
+
+saveDB();
+
+refreshAll();
+
+alert("Backup restored successfully!");
+
+}catch(err){
+
+alert("Invalid backup file.");
+
+}
+
+};
+
+reader.readAsText(file);
+
+}
+
+
+function clearAllData(){
+
+if(!confirm(
+"WARNING: This will delete ALL CRM data. Continue?"
+)) return;
+
+if(!confirm(
+"Are you absolutely sure?"
+)) return;
+
+db={
+leads:[],
+customers:[],
+products:[],
+purchases:[],
+sales:[],
+samples:[]
+};
+
+saveDB();
+
+refreshAll();
+
+showToast("All data deleted.");
+
+}
+
+
+/* =========================
+   CSV EXPORT
+========================= */
+
+function exportLeadsCSV(){
+
+if(!db.leads.length){
+
+alert("No leads to export.");
+
+return;
+
+}
+
+const header=[
+"Business",
+"Instagram",
+"Contact",
+"Phone",
+"City",
+"Type",
+"Fabric",
+"Quantity",
+"Priority",
+"Status",
+"Follow-up",
+"Source",
+"Notes"
+];
+
+const rows =
+db.leads.map(l=>[
+l.business,
+l.instagram,
+l.contact,
+l.phone,
+l.city,
+l.type,
+l.fabric,
+l.qty,
+l.priority,
+l.status,
+l.followup,
+l.source,
+l.notes
+]);
+
+let csv =
+[header,...rows]
+.map(row=>
+row.map(v=>
+`"${String(v||"").replace(/"/g,'""')}"`
+).join(",")
+)
+.join("\n");
+
+const blob =
+new Blob(
+[csv],
+{type:"text/csv"}
+);
+
+const url =
+URL.createObjectURL(blob);
+
+const a =
+document.createElement("a");
+
+a.href=url;
+
+a.download=
+"fabric-leads-"+today()+".csv";
+
+a.click();
+
+URL.revokeObjectURL(url);
+
+}
+
+
+/* =========================
+   SECURITY HELPERS
+========================= */
+
+function esc(value){
+
+return String(value || "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+function escJS(value){
+
+return String(value || "")
+.replace(/\\/g,"\\\\")
+.replace(/'/g,"\\'");
+
+}
+
+
+/* =========================
+   REFRESH
+========================= */
+
+function refreshAll(){
 
 renderLeads();
+
+renderCustomers();
+
+renderProducts();
+
+renderPurchases();
+
+renderSales();
+
+renderSamples();
+
+renderFollowups();
+
+updateReports();
+
+updateDashboard();
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+refreshAll();
 
 </script>
 
 </body>
 </html>
+<button
+class="btn btn-green"
+onclick="exportLeadsCSV()">
+⬇️ Export Leads to Excel/CSV
+</button>
