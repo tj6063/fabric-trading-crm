@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fabric Trading CRM</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f6fa;
+      color: #222;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 20px;
+    }
+
+    header h1 {
+      font-size: 24px;
+    }
+
+    header p {
+      margin-top: 5px;
+      color: #cbd5e1;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 25px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .card h3 {
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .card .number {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .section {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .section h2 {
+      margin-bottom: 20px;
+    }
+
+    .form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    textarea {
+      min-height: 80px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    th {
+      background: #f9fafb;
+    }
+
+    .hot {
+      color: #dc2626;
+      font-weight: bold;
+    }
+
+    .warm {
+      color: #d97706;
+      font-weight: bold;
+    }
+
+    .cold {
+      color: #6b7280;
+      font-weight: bold;
+    }
+
+    @media(max-width: 800px) {
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .form {
+        grid-template-columns: 1fr;
+      }
+
+      .full {
+        grid-column: auto;
+      }
+
+      table {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Fabric Trading CRM</h1>
+  <p>Boutique & Fashion Designer Lead Management</p>
+</header>
+
+<div class="container">
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>Total Leads</h3>
+      <div class="number" id="totalLeads">0</div>
+    </div>
+
+    <div class="card">
+      <h3>Hot Leads</h3>
+      <div class="number" id="hotLeads">0</div>
+    </div>
+
+    <div class="card">
+      <h3>Interested</h3>
+      <div class="number" id="interestedLeads">0</div>
+    </div>
+
+    <div class="card">
+      <h3>Orders</h3>
+      <div class="number" id="orders">0</div>
+    </div>
+
+  </div>
+
+  <div class="section">
+
+    <h2>➕ Add Instagram Lead</h2>
+
+    <div class="form">
+
+      <input id="business" placeholder="Boutique / Business Name">
+
+      <input id="instagram" placeholder="Instagram Username">
+
+      <input id="contact" placeholder="Owner / Designer Name">
+
+      <input id="city" placeholder="City">
+
+      <select id="type">
+        <option value="Boutique">Boutique</option>
+        <option value="Fashion Designer">Fashion Designer</option>
+      </select>
+
+      <input id="fabric" placeholder="Fabric Requirement">
+
+      <select id="priority">
+        <option value="Hot">🔥 Hot</option>
+        <option value="Warm">🟠 Warm</option>
+        <option value="Cold">⚪ Cold</option>
+      </select>
+
+      <select id="status">
+        <option value="New">New</option>
+        <option value="Contacted">Contacted</option>
+        <option value="Interested">Interested</option>
+        <option value="Sample Sent">Sample Sent</option>
+        <option value="Quotation">Quotation</option>
+        <option value="Order">Order</option>
+      </select>
+
+      <input id="followup" type="date">
+
+      <textarea id="notes" class="full" placeholder="Notes"></textarea>
+
+      <button onclick="addLead()" class="full">
+        Save Lead
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="section">
+
+    <h2>📋 Leads</h2>
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Business</th>
+          <th>Instagram</th>
+          <th>City</th>
+          <th>Type</th>
+          <th>Fabric</th>
+          <th>Priority</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody id="leadTable"></tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+<script>
+
+let leads = JSON.parse(localStorage.getItem("fabricLeads")) || [];
+
+function addLead() {
+
+  const lead = {
+
+    business: document.getElementById("business").value,
+    instagram: document.getElementById("instagram").value,
+    contact: document.getElementById("contact").value,
+    city: document.getElementById("city").value,
+    type: document.getElementById("type").value,
+    fabric: document.getElementById("fabric").value,
+    priority: document.getElementById("priority").value,
+    status: document.getElementById("status").value,
+    followup: document.getElementById("followup").value,
+    notes: document.getElementById("notes").value
+
+  };
+
+  if (!lead.business) {
+    alert("Please enter business name");
+    return;
+  }
+
+  leads.push(lead);
+
+  localStorage.setItem(
+    "fabricLeads",
+    JSON.stringify(leads)
+  );
+
+  clearForm();
+  renderLeads();
+}
+
+function clearForm() {
+
+  document.getElementById("business").value = "";
+  document.getElementById("instagram").value = "";
+  document.getElementById("contact").value = "";
+  document.getElementById("city").value = "";
+  document.getElementById("fabric").value = "";
+  document.getElementById("followup").value = "";
+  document.getElementById("notes").value = "";
+
+}
+
+function renderLeads() {
+
+  const table = document.getElementById("leadTable");
+
+  table.innerHTML = "";
+
+  leads.forEach(lead => {
+
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+
+      <td>${lead.business}</td>
+
+      <td>${lead.instagram}</td>
+
+      <td>${lead.city}</td>
+
+      <td>${lead.type}</td>
+
+      <td>${lead.fabric}</td>
+
+      <td class="${lead.priority.toLowerCase()}">
+        ${lead.priority}
+      </td>
+
+      <td>${lead.status}</td>
+
+    `;
+
+    table.appendChild(row);
+
+  });
+
+  updateDashboard();
+
+}
+
+function updateDashboard() {
+
+  document.getElementById("totalLeads").innerText =
+    leads.length;
+
+  document.getElementById("hotLeads").innerText =
+    leads.filter(x => x.priority === "Hot").length;
+
+  document.getElementById("interestedLeads").innerText =
+    leads.filter(x => x.status === "Interested").length;
+
+  document.getElementById("orders").innerText =
+    leads.filter(x => x.status === "Order").length;
+
+}
+
+renderLeads();
+
+</script>
+
+</body>
+</html>
